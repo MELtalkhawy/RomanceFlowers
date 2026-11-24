@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="زهور رومانس - معرض الزهور الطبيعية والهدايا الفاخرة في المدينة المنورة. تنسيق باقات وهدايا حسب الطلب لجميع المناسبات.">
+    <title>زهور رومانس | معرض الزهور والهدايا الفاخرة</title>
+
+    <!-- Google Fonts: El Messiri & Tajawal (AR) + Playfair Display & Plus Jakarta Sans (EN) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Playfair+Display:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'warm-white': '#FAF9F6',
+                        'soft-sand': '#F2EFE9',
+                        'forest-green': '#2D4F3E',
+                        'forest-hover': '#223C2F',
+                        'dark-bg': '#121413',
+                        'dark-surface': '#181A19',
+                        'dark-card': '#1F2220',
+                        'champagne': '#C6A87C',
+                        'champagne-dark': '#9E7F52',
+                        'charcoal': '#1F2421',
+                        'muted-stone': '#6B726E',
+                        'dark-muted': '#A6ABA8'
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['El Messiri', 'Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'studio-dark': '0 22px 45px -15px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(198, 168, 124, 0.12)',
+                        'studio-light': '0 20px 45px -15px rgba(31, 36, 33, 0.12), 0 0 0 1px rgba(45, 79, 62, 0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ضمان ترابط الحروف العربية بدون تقطع */
+        html[lang="ar"] * {
+            letter-spacing: 0 !important;
+        }
+        html[lang="en"] body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        html[lang="en"] .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* انتقالات ناعمة عند تبديل الثيم */
+        body, header, footer, section, article, div, button, input, textarea {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-warm-white text-charcoal dark:bg-dark-bg dark:text-warm-white font-sans antialiased selection:bg-forest-green selection:text-warm-white">
+
+    <!-- ==================== 1. شريط التنقل العلوي (Navigation Bar) ==================== -->
+    <header class="sticky top-0 z-50 bg-warm-white/90 dark:bg-dark-bg/90 backdrop-blur-md border-b border-stone-200/70 dark:border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <!-- الشعار -->
+                <a href="#home" onclick="navigateTo('home'); return false;" class="flex items-center gap-2.5 group">
+                    <span class="font-serif text-2xl md:text-3xl font-bold text-forest-green dark:text-warm-white group-hover:text-champagne transition-colors" data-i18n="brandName">زهور رومانس</span>
+                    <span class="text-xs text-muted-stone dark:text-champagne border-s border-stone-300 dark:border-white/20 ps-2.5 hidden sm:inline-block" data-i18n="brandTag">للزهور والهدايا</span>
+                </a>
+
+                <!-- روابط التنقل (سطح المكتب) -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-charcoal dark:text-warm-white/90">
+                    <a href="#home" onclick="navigateTo('home'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navHome">الرئيسية</a>
+                    <a href="#bouquets" onclick="navigateToSection('bouquets'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navBouquets">الباقات</a>
+                    <a href="#occasions" onclick="navigateToSection('occasions'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navOccasions">المناسبات</a>
+                    <a href="#reviews" onclick="navigateToSection('reviews'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navReviews">آراء العملاء</a>
+                    <a href="#about" onclick="navigateTo('about'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navAbout">من نحن</a>
+                    <a href="#contact" onclick="navigateTo('contact'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navContact">تواصل معنا</a>
+                </nav>
+
+                <!-- أزرار التحكم (اللغة + الثيم + قائمة الموبايل) -->
+                <div class="flex items-center gap-2.5">
+                    <button id="lang-toggle" type="button" onclick="toggleLanguage()" class="px-3.5 py-2 text-xs font-bold rounded-full border border-stone-300 dark:border-champagne/40 text-charcoal dark:text-champagne hover:bg-forest-green hover:text-warm-white hover:border-forest-green dark:hover:bg-champagne dark:hover:text-dark-bg transition-all" aria-label="Toggle Language">
+                        EN
+                    </button>
+
+                    <button id="theme-toggle" type="button" onclick="toggleTheme()" class="p-2.5 rounded-full border border-stone-300 dark:border-white/15 text-charcoal dark:text-champagne hover:bg-soft-sand dark:hover:bg-dark-card transition-all" aria-label="Toggle Theme">
+                        <svg id="sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+
+                    <button type="button" onclick="openOrderModal('تنسيق خاص حسب الطلب', 'Custom Bespoke Arrangement')" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs font-medium text-warm-white bg-forest-green hover:bg-forest-hover border border-champagne/20 rounded-full shadow-sm" data-i18n="navCta">
+                        اطلب تنسيقاً خاصاً
+                    </button>
+
+                    <button id="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" class="lg:hidden p-2 text-charcoal dark:text-warm-white hover:text-champagne focus:outline-none" aria-label="Menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- القائمة المنسدلة للموبايل -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-warm-white dark:bg-dark-surface border-b border-stone-200 dark:border-white/10 px-4 pt-3 pb-6 space-y-2">
+            <a href="#home" onclick="navigateTo('home'); toggleMobileMenu(); return false;" class="block py-2.5 text-sm font-medium hover:text-champagne" data-i18n="navHome">الرئيسية</a>
+            <a href="#bouquets" onclick="navigateToSection('bouquets'); toggleMobileMenu(); return false;" class="block py-2.5 text-sm font-medium hover:text-champagne" data-i18n="navBouquets">الباقات</a>
+            <a href="#occasions" onclick="navigateToSection('occasions'); toggleMobileMenu(); return false;" class="block py-2.5 text-sm font-medium hover:text-champagne" data-i18n="navOccasions">المناسبات</a>
+            <a href="#reviews" onclick="navigateToSection('reviews'); toggleMobileMenu(); return false;" class="block py-2.5 text-sm font-medium hover:text-champagne" data-i18n="navReviews">آراء العملاء</a>
+            <a href="#about" onclick="navigateTo('about'); toggleMobileMenu(); return false;" class="block py-2.5 text-sm font-medium hover:text-champagne" data-i18n="navAbout">من نحن</a>
+            <a href="#contact" onclick="navigateTo('contact'); toggleMobileMenu(); return false;" class="block py-2.5 text-sm font-medium hover:text-champagne" data-i18n="navContact">تواصل معنا</a>
+            <button type="button" onclick="openOrderModal('تنسيق خاص حسب الطلب', 'Custom Bespoke Arrangement'); toggleMobileMenu();" class="w-full mt-3 py-3 text-sm font-medium text-warm-white bg-forest-green rounded-full" data-i18n="navCta">
+                اطلب تنسيقاً خاصاً
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== الصفحة الرئيسية (MAIN HOME VIEW) ==================== -->
+    <main id="page-home" class="page-view">
+
+        <!-- 2. القسم الرئيسي (Hero Section) -->
+        <section id="hero" class="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
+            <div class="pointer-events-none absolute -top-24 start-1/2 -translate-x-1/2 w-[38rem] h-[38rem] rounded-full bg-forest-green/15 blur-3xl hidden dark:block"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                    <!-- النص الترحيبي -->
+                    <div class="lg:col-span-6 space-y-7 text-center lg:text-start">
+                        <span class="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-medium text-forest-green dark:text-champagne bg-soft-sand dark:bg-dark-card rounded-full border border-stone-200 dark:border-champagne/25">
+                            <span class="w-1.5 h-1.5 rounded-full bg-forest-green dark:bg-champagne"></span>
+                            <span data-i18n="heroBadge">المدينة المنورة • زهور طبيعية مقطوفة يومياً</span>
+                        </span>
+                        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+                            <span data-i18n="heroTitle1">حيث تُزهر الرومانسية،</span>
+                            <br>
+                            <span class="text-forest-green dark:text-champagne" data-i18n="heroTitle2">في كل باقة وتفصيلة</span>
+                        </h1>
+                        <p class="text-base sm:text-lg text-muted-stone dark:text-dark-muted leading-relaxed max-w-xl mx-auto lg:mx-0" data-i18n="heroDesc">
+                            في زهور رومانس، ننسّق لك باقات زهور فاخرة وهدايا منتقاة بعناية فائقة لتصنع لحظات لا تُنسى، بتصميم عصري يجمع بين البساطة والفخامة الهادئة.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#bouquets" onclick="navigateToSection('bouquets'); return false;" class="w-full sm:w-auto px-8 py-4 text-sm sm:text-base font-medium text-warm-white bg-forest-green hover:bg-forest-hover border border-champagne/25 rounded-full shadow-lg text-center" data-i18n="heroBtnPrimary">
+                                استكشف الباقات
+                            </a>
+                            <button type="button" onclick="openOrderModal('تنسيق هدية مخصصة', 'Bespoke Gift Arrangement')" class="w-full sm:w-auto px-8 py-4 text-sm sm:text-base font-medium text-forest-green dark:text-champagne bg-transparent border border-forest-green/40 dark:border-champagne/40 hover:border-forest-green dark:hover:border-champagne rounded-full text-center" data-i18n="heroBtnSecondary">
+                                تنسيق هدية مخصصة
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- صورة الباقة الرئيسية -->
+                    <div class="lg:col-span-6 relative">
+                        <div class="relative rounded-t-[10rem] rounded-b-3xl overflow-hidden shadow-studio-light dark:shadow-studio-dark aspect-[4/5] max-w-md mx-auto bg-soft-sand dark:bg-dark-card p-2 border border-stone-200/70 dark:border-white/10">
+                            <div class="w-full h-full rounded-t-[9.5rem] rounded-b-2xl overflow-hidden">
+                                <img
+                                    src="https://drive.google.com/thumbnail?id=1dD5d9kRaWsWJ9PtT6McqeKho0Fy9Z-K_&sz=w1200"
+                                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=900&q=85';"
+                                    referrerpolicy="no-referrer"
+                                    alt="Romance Flowers Luxury Bouquet"
+                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                                    loading="eager"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- بطاقة التقييم العائمة -->
+                        <div class="hidden sm:flex items-center gap-3.5 absolute bottom-8 start-2 lg:start-6 bg-warm-white/95 dark:bg-dark-card/95 backdrop-blur-md px-5 py-3.5 rounded-2xl shadow-xl border border-stone-200/70 dark:border-champagne/25">
+                            <div class="w-10 h-10 rounded-full bg-forest-green/15 dark:bg-forest-green/40 flex items-center justify-center text-forest-green dark:text-champagne font-bold text-sm">
+                                ★ 4.6
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold" data-i18n="heroCardTitle">تقييم عملائنا على جوجل</p>
+                                <p class="text-xs text-muted-stone dark:text-dark-muted" data-i18n="heroCardSub">أكثر من 185 تقييم في المدينة المنورة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. شبكة عرض الباقات بدون أسعار (Bouquets Grid) -->
+        <section id="bouquets" class="py-20 bg-soft-sand/60 dark:bg-dark-surface border-y border-stone-200/70 dark:border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-bold text-forest-green dark:text-champagne tracking-wide" data-i18n="bouquetsEyebrow">معرض النماذج المختارة</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold" data-i18n="bouquetsTitle">تشكيلة الباقات الفاخرة</h2>
+                    <p class="text-muted-stone dark:text-dark-muted text-sm sm:text-base" data-i18n="bouquetsSubtitle">كل باقة تُصمم خصيصاً لك بأجود الزهور الطبيعية الموسمية مع إمكانية إضافة رسالة إهداء مطبوعة</p>
+                </div>
+
+                <div id="bouquets-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+            </div>
+        </section>
+
+        <!-- 4. قسم تنسيق الهدايا حسب المناسبة (Occasions Section) -->
+        <section id="occasions" class="py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                    <div class="max-w-xl space-y-3">
+                        <span class="text-xs font-bold text-forest-green dark:text-champagne" data-i18n="occEyebrow">خدمة التنسيق المخصص</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold" data-i18n="occTitle">تنسيق الهدايا حسب المناسبة</h2>
+                        <p class="text-muted-stone dark:text-dark-muted text-sm sm:text-base" data-i18n="occSubtitle">نجمع لك الزهور الطبيعية مع الشوكولاتة الفاخرة، الشموع المعطرة، أو هديتك الخاصة في تنسيق يليق بمناسبتك.</p>
+                    </div>
+                    <button type="button" onclick="openOrderModal('تنسيق هدية لمناسبة خاصة', 'Custom Special Occasion Gift')" class="self-start md:self-auto px-6 py-3 text-sm font-medium text-warm-white bg-forest-green hover:bg-forest-hover border border-champagne/25 rounded-full" data-i18n="occCta">
+                        تحدث مع منسّق الهدايا
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div onclick="openOrderModal('تنسيق الزفاف والخطوبة', 'Weddings & Engagement Arrangement')" class="cursor-pointer group p-8 bg-soft-sand/60 dark:bg-dark-card hover:bg-forest-green dark:hover:bg-forest-green rounded-2xl border border-stone-200/70 dark:border-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-warm-white dark:bg-dark-surface text-forest-green dark:text-champagne flex items-center justify-center mb-6 shadow-sm">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold group-hover:text-warm-white mb-2" data-i18n="occ1Title">الزفاف والخطوبة</h3>
+                        <p class="text-sm text-muted-stone dark:text-dark-muted group-hover:text-stone-200 leading-relaxed" data-i18n="occ1Desc">مسكات عرائس وتنسيقات فاخرة لليلة العمر بتفاصيل ناعمة وراقية.</p>
+                    </div>
+
+                    <div onclick="openOrderModal('تنسيق أعياد الميلاد والذكرى السنوية', 'Birthdays & Anniversaries Arrangement')" class="cursor-pointer group p-8 bg-soft-sand/60 dark:bg-dark-card hover:bg-forest-green dark:hover:bg-forest-green rounded-2xl border border-stone-200/70 dark:border-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-warm-white dark:bg-dark-surface text-forest-green dark:text-champagne flex items-center justify-center mb-6 shadow-sm">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold group-hover:text-warm-white mb-2" data-i18n="occ2Title">أعياد الميلاد</h3>
+                        <p class="text-sm text-muted-stone dark:text-dark-muted group-hover:text-stone-200 leading-relaxed" data-i18n="occ2Desc">صناديق هدايا متكاملة تجمع الورد الطبيعي مع أفخر أنواع الشوكولاتة.</p>
+                    </div>
+
+                    <div onclick="openOrderModal('تنسيق التخرج والنجاح', 'Graduation & Success Arrangement')" class="cursor-pointer group p-8 bg-soft-sand/60 dark:bg-dark-card hover:bg-forest-green dark:hover:bg-forest-green rounded-2xl border border-stone-200/70 dark:border-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-warm-white dark:bg-dark-surface text-forest-green dark:text-champagne flex items-center justify-center mb-6 shadow-sm">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold group-hover:text-warm-white mb-2" data-i18n="occ3Title">التخرج والنجاح</h3>
+                        <p class="text-sm text-muted-stone dark:text-dark-muted group-hover:text-stone-200 leading-relaxed" data-i18n="occ3Desc">باقات مبهجة وعبارات تهنئة مخصصة للاحتفاء بلحظات الإنجاز.</p>
+                    </div>
+
+                    <div onclick="openOrderModal('تنسيق المواليد والتهنئة', 'Newborn & Congratulations Arrangement')" class="cursor-pointer group p-8 bg-soft-sand/60 dark:bg-dark-card hover:bg-forest-green dark:hover:bg-forest-green rounded-2xl border border-stone-200/70 dark:border-white/10 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-warm-white dark:bg-dark-surface text-forest-green dark:text-champagne flex items-center justify-center mb-6 shadow-sm">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                        </div>
+                        <h3 class="font-serif text-xl font-bold group-hover:text-warm-white mb-2" data-i18n="occ4Title">المواليد والتهنئة</h3>
+                        <p class="text-sm text-muted-stone dark:text-dark-muted group-hover:text-stone-200 leading-relaxed" data-i18n="occ4Desc">سلال وتنسيقات هادئة بألوان الباستيل الناعمة لاستقبال أجمل البدايات.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. قسم آراء العملاء وتقييم جوجل (Customer Reviews Section) -->
+        <section id="reviews" class="py-20 bg-soft-sand/60 dark:bg-dark-surface border-t border-stone-200/70 dark:border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                    <div class="max-w-xl space-y-3">
+                        <span class="text-xs font-bold text-forest-green dark:text-champagne" data-i18n="reviewsEyebrow">ثقة عملائنا في المدينة المنورة</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold" data-i18n="reviewsTitle">ماذا يقول عملاؤنا</h2>
+                        <div class="flex items-center gap-3 pt-1">
+                            <div class="flex items-center text-champagne text-lg">★★★★★</div>
+                            <span class="text-sm font-bold" data-i18n="reviewsScore">4.6 من 5</span>
+                            <span class="text-xs text-muted-stone dark:text-dark-muted" data-i18n="reviewsCount">(بناءً على 185 تقييم على خرائط جوجل)</span>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/place/%D8%B2%D9%87%D9%88%D8%B1+%D8%B1%D9%88%D9%85%D8%A7%D9%86%D8%B3%E2%80%AD/@24.490635,39.5931054,17z/data=!3m1!4b1!4m6!3m5!1s0x15bdbee9cb8b634d:0x97a2a15c67f766d1!8m2!3d24.4906301!4d39.5905305!16s%2Fg%2F11cnbnlnt8" target="_blank" rel="noopener" class="self-start md:self-auto px-6 py-3 text-xs sm:text-sm font-medium text-forest-green dark:text-champagne border border-forest-green/40 dark:border-champagne/40 hover:bg-forest-green hover:text-warm-white dark:hover:bg-champagne dark:hover:text-dark-bg rounded-full transition-colors" data-i18n="reviewsMoreBtn">
+                        عرض جميع التقييمات على جوجل
+                    </a>
+                </div>
+
+                <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== الصفحات الإضافية (ADDITIONAL PAGES) ==================== -->
+
+    <!-- صفحة: من نحن (About Us) -->
+    <section id="page-about" class="page-view hidden py-20 min-h-[75vh]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button type="button" onclick="navigateTo('home')" class="inline-flex items-center gap-2 text-xs font-medium text-forest-green dark:text-champagne mb-8 hover:underline">
+                <span data-i18n="backHome">← العودة إلى الرئيسية</span>
+            </button>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <div class="rounded-3xl overflow-hidden bg-dark-card p-2 shadow-studio-light dark:shadow-studio-dark border border-stone-200/70 dark:border-white/10 aspect-[4/5]">
+                        <img
+                            src="https://drive.google.com/thumbnail?id=11Mp58RdH0dgHk24bbTUnKVxX4z-MD5d6&sz=w1000"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80';"
+                            referrerpolicy="no-referrer"
+                            alt="About Romance Flowers"
+                            class="w-full h-full object-cover rounded-2xl"
+                        >
+                    </div>
+                </div>
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-xs font-bold text-forest-green dark:text-champagne" data-i18n="aboutEyebrow">قصتنا وشغفنا</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-bold" data-i18n="aboutTitle">من نحن</h1>
+                    <p class="text-muted-stone dark:text-dark-muted leading-relaxed text-base" data-i18n="aboutP1">
+                        في «زهور رومانس»، نؤمن بأن الزهور ليست مجرد هدية عابرة، بل هي رسالة صامتة تحمل أصدق المشاعر. بدأ شغفنا من الرغبة في تحويل كل لحظة إلى ذكرى فنية دافئة عبر تنسيقات زهور طبيعية منتقاة يومياً بعناية فائقة في المدينة المنورة.
+                    </p>
+                    <p class="text-muted-stone dark:text-dark-muted leading-relaxed text-base" data-i18n="aboutP2">
+                        نصمّم كل باقة وصندوق هدايا بروح عصرية هادئة تجمع بين جمال الطبيعة ولمسات التغليف الفاخر، مع اهتمام دقيق بأدق التفاصيل بدءاً من اختيار تدرجات الألوان وحتى طباعة بطاقة الإهداء الخاصة بك.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-5 rounded-2xl bg-soft-sand dark:bg-dark-card border border-stone-200/70 dark:border-white/10">
+                            <h3 class="font-serif text-lg font-bold text-forest-green dark:text-champagne mb-1" data-i18n="aboutStat1Title">زهور طازجة يومياً</h3>
+                            <p class="text-xs text-muted-stone dark:text-dark-muted" data-i18n="aboutStat1Desc">انتقاء يدوي لأجود الأزهار الموسمية</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-soft-sand dark:bg-dark-card border border-stone-200/70 dark:border-white/10">
+                            <h3 class="font-serif text-lg font-bold text-forest-green dark:text-champagne mb-1" data-i18n="aboutStat2Title">توصيل واستلام مرن</h3>
+                            <p class="text-xs text-muted-stone dark:text-dark-muted" data-i18n="aboutStat2Desc">توصيل داخل المدينة أو استلام من المعرض</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة: تواصل معنا (Contact Us) -->
+    <section id="page-contact" class="page-view hidden py-20 min-h-[75vh]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button type="button" onclick="navigateTo('home')" class="inline-flex items-center gap-2 text-xs font-medium text-forest-green dark:text-champagne mb-8 hover:underline">
+                <span data-i18n="backHome">← العودة إلى الرئيسية</span>
+            </button>
+            <div class="bg-soft-sand/70 dark:bg-dark-card rounded-3xl p-8 sm:p-12 border border-stone-200/70 dark:border-white/10 shadow-studio-light dark:shadow-studio-dark">
+                <div class="max-w-xl mb-10 space-y-2">
+                    <span class="text-xs font-bold text-forest-green dark:text-champagne" data-i18n="contactEyebrow">يسعدنا خدمتك</span>
+                    <h1 class="font-serif text-3xl sm:text-4xl font-bold" data-i18n="contactTitle">تواصل معنا</h1>
+                    <p class="text-sm sm:text-base text-muted-stone dark:text-dark-muted" data-i18n="contactSubtitle">للطلبات الخاصة، تنسيق المناسبات، أو أي استفسار، تواصل معنا مباشرة عبر النموذج أو القنوات السريعة.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+                    <!-- نموذج التواصل -->
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="md:col-span-7 space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium mb-1.5 text-muted-stone dark:text-dark-muted" data-i18n="contactNameLabel">الاسم</label>
+                            <input id="contact-name" type="text" required class="w-full px-4 py-3 rounded-xl bg-warm-white dark:bg-dark-surface border border-stone-300 dark:border-white/15 focus:outline-none focus:border-forest-green dark:focus:border-champagne text-sm" data-i18n-placeholder="contactNamePh" placeholder="اكتب اسمك الكريم">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium mb-1.5 text-muted-stone dark:text-dark-muted" data-i18n="contactMsgLabel">رسالتك أو تفاصيل المناسبة</label>
+                            <textarea id="contact-message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-warm-white dark:bg-dark-surface border border-stone-300 dark:border-white/15 focus:outline-none focus:border-forest-green dark:focus:border-champagne text-sm" data-i18n-placeholder="contactMsgPh" placeholder="أخبرنا عن الألوان المفضلة أو تفاصيل الهدية المطلوبة..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-forest-green hover:bg-forest-hover text-warm-white text-sm font-medium border border-champagne/25" data-i18n="contactSubmit">
+                            إرسال الرسالة عبر واتساب
+                        </button>
+                    </form>
+
+                    <!-- أزرار التواصل المباشر + بطاقة الموقع الحقيقي -->
+                    <div class="md:col-span-5 flex flex-col justify-between space-y-5">
+                        <div class="space-y-3.5">
+                            <h3 class="font-serif text-lg font-bold" data-i18n="contactDirectTitle">قنوات التواصل المباشر</h3>
+                            <a href="https://wa.me/966541403095" target="_blank" rel="noopener" class="flex items-center justify-center gap-3 w-full py-3.5 px-5 rounded-xl bg-forest-green/15 dark:bg-forest-green/30 hover:bg-forest-green text-forest-green dark:text-warm-white hover:text-warm-white border border-forest-green/30 transition-all text-sm font-medium">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 2C6.508 2 2.016 6.492 2.016 12.015c0 1.765.461 3.489 1.337 5.008L2 22l5.109-1.34a9.974 9.974 0 004.922 1.298h.004c5.522 0 10.015-4.492 10.015-10.015C22.05 6.42 17.554 2 12.031 2zm5.814 14.236c-.246.693-1.434 1.326-1.992 1.408-.511.076-1.174.108-1.894-.122-.437-.139-1.001-.325-1.72-.636-3.025-1.307-5-4.355-5.151-4.557-.15-.202-1.229-1.637-1.229-3.123 0-1.486.779-2.217 1.055-2.519.277-.302.604-.378.805-.378.202 0 .403.002.579.011.186.009.435-.071.681.52.246.592.842 2.051.917 2.202.075.151.125.327.025.529-.1.202-.15.327-.301.503-.151.176-.317.393-.452.528-.151.151-.308.315-.132.617.176.302.782 1.29 1.679 2.091 1.154 1.029 2.126 1.348 2.428 1.499.302.151.478.126.654-.076.176-.202.755-.881.956-1.183.202-.302.403-.252.68-.151.277.101 1.762.831 2.064.982.302.151.503.227.578.353.076.126.076.73-.17 1.423z"/></svg>
+                                <span data-i18n="contactWaBtn">تواصل عبر واتساب</span>
+                            </a>
+                            <a href="https://www.instagram.com/romance.flowers/" target="_blank" rel="noopener" class="flex items-center justify-center gap-3 w-full py-3.5 px-5 rounded-xl bg-warm-white dark:bg-dark-surface hover:border-champagne border border-stone-300 dark:border-white/15 transition-all text-sm font-medium">
+                                <svg class="w-5 h-5 text-forest-green dark:text-champagne" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.8"></rect><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke-width="1.8"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2" stroke-linecap="round"></line></svg>
+                                <span data-i18n="contactIgBtn">تابعنا على إنستغرام</span>
+                            </a>
+                        </div>
+
+                        <!-- بطاقة العنوان والاتجاهات الحقيقية -->
+                        <div class="p-5 rounded-2xl bg-warm-white dark:bg-dark-surface border border-stone-200 dark:border-white/10 space-y-3">
+                            <div class="flex items-center gap-2 text-forest-green dark:text-champagne">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span class="text-xs font-bold" data-i18n="locationTitle">موقع المعرض والاتجاهات</span>
+                            </div>
+                            <p class="text-xs text-muted-stone dark:text-dark-muted leading-relaxed" data-i18n="locationAddress">
+                                8625 طريق الملك عبدالله الفرعي، حي الراية، المدينة المنورة 42312، المملكة العربية السعودية
+                            </p>
+                            <div class="text-xs text-muted-stone dark:text-dark-muted space-y-1 pt-1 border-t border-stone-200/70 dark:border-white/10">
+                                <p data-i18n="contactHours">ساعات العمل: يومياً من 4:00 عصراً حتى 12:00 منتصف الليل</p>
+                                <p dir="ltr" class="text-start font-medium text-charcoal dark:text-warm-white">+966 54 140 3095</p>
+                            </div>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=24.4906301,39.5905305" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-soft-sand dark:bg-dark-card hover:bg-forest-green hover:text-warm-white text-xs font-medium text-forest-green dark:text-champagne transition-colors" data-i18n="locationBtn">
+                                الحصول على الاتجاهات عبر خرائط جوجل ←
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة: سياسة الخصوصية (Privacy Policy) -->
+    <section id="page-privacy" class="page-view hidden py-20 min-h-[75vh]">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button type="button" onclick="navigateTo('home')" class="inline-flex items-center gap-2 text-xs font-medium text-forest-green dark:text-champagne mb-8 hover:underline">
+                <span data-i18n="backHome">← العودة إلى الرئيسية</span>
+            </button>
+            <div class="bg-soft-sand/70 dark:bg-dark-card rounded-3xl p-8 sm:p-12 border border-stone-200/70 dark:border-white/10 space-y-6">
+                <h1 class="font-serif text-3xl sm:text-4xl font-bold" data-i18n="privacyTitle">سياسة الخصوصية</h1>
+                <p class="text-sm sm:text-base text-muted-stone dark:text-dark-muted leading-relaxed" data-i18n="privacyP1">
+                    في زهور رومانس، نحترم خصوصيتك ونلتزم بحماية كافة البيانات الشخصية التي تشاركها معنا عند طلب الباقات أو التواصل معنا عبر واتساب.
+                </p>
+                <div class="space-y-4 text-sm sm:text-base text-muted-stone dark:text-dark-muted leading-relaxed">
+                    <div class="p-5 rounded-2xl bg-warm-white dark:bg-dark-surface border border-stone-200/70 dark:border-white/5">
+                        <h2 class="font-serif text-lg font-bold text-charcoal dark:text-champagne mb-2" data-i18n="privacyH1">سرية رسائل الإهداء</h2>
+                        <p data-i18n="privacyB1">تُعامل جميع نصوص «رسائل الإهداء» التي يكتبها العميل بسرية تامة، وتُستخدم حصرياً لطباعة بطاقة الإهداء المرفقة مع الباقة دون تخزينها أو مشاركتها مع أي طرف ثالث.</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-warm-white dark:bg-dark-surface border border-stone-200/70 dark:border-white/5">
+                        <h2 class="font-serif text-lg font-bold text-charcoal dark:text-champagne mb-2" data-i18n="privacyH2">استخدام بيانات التواصل</h2>
+                        <p data-i18n="privacyB2">تُستخدم بيانات التواصل والعنوان فقط لتأكيد تفاصيل التنسيق وإتمام عملية التوصيل بسلاسة، ولا نقوم ببيع أو مشاركة معلومات العملاء لأي أغراض تسويقية خارجية.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة: اتفاقية المستخدم (Terms of Use) -->
+    <section id="page-terms" class="page-view hidden py-20 min-h-[75vh]">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <button type="button" onclick="navigateTo('home')" class="inline-flex items-center gap-2 text-xs font-medium text-forest-green dark:text-champagne mb-8 hover:underline">
+                <span data-i18n="backHome">← العودة إلى الرئيسية</span>
+            </button>
+            <div class="bg-soft-sand/70 dark:bg-dark-card rounded-3xl p-8 sm:p-12 border border-stone-200/70 dark:border-white/10 space-y-6">
+                <h1 class="font-serif text-3xl sm:text-4xl font-bold" data-i18n="termsTitle">اتفاقية المستخدم</h1>
+                <div class="space-y-4 text-sm sm:text-base text-muted-stone dark:text-dark-muted leading-relaxed">
+                    <div class="p-5 rounded-2xl bg-warm-white dark:bg-dark-surface border border-stone-200/70 dark:border-white/5">
+                        <h2 class="font-serif text-lg font-bold text-charcoal dark:text-champagne mb-2" data-i18n="termsH1">النماذج الاسترشادية والزهور الموسمية</h2>
+                        <p data-i18n="termsB1">جميع الصور المعروضة في الموقع هي نماذج استرشادية لأعمالنا. ونظراً لطبيعة الزهور الطبيعية ومواسم توفرها، قد يختلف تنسيق بعض أنواع الزهور بشكل طفيف حسب التوفر اليومي، مع التزامنا التام بالحفاظ على نفس الروح الفنية، وتدرجات الألوان، ومستوى الفخامة والجودة.</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-warm-white dark:bg-dark-surface border border-stone-200/70 dark:border-white/5">
+                        <h2 class="font-serif text-lg font-bold text-charcoal dark:text-champagne mb-2" data-i18n="termsH2">تأكيد الطلب والتنسيق</h2>
+                        <p data-i18n="termsB2">يتم تأكيد تفاصيل الباقة، التكلفة النهائية حسب الحجم والإضافات، وموعد التوصيل مباشرة مع فريقنا عبر واتساب قبل البدء بالتنسيق.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== نافذة "رسالة الإهداء" والطلب عبر واتساب (MODAL) ==================== -->
+    <div id="order-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+        <div class="relative w-full max-w-lg rounded-3xl bg-warm-white dark:bg-dark-card border border-stone-200 dark:border-champagne/30 p-6 sm:p-8 shadow-2xl">
+            <button type="button" onclick="closeOrderModal()" class="absolute top-5 end-5 p-2 rounded-full text-muted-stone dark:text-dark-muted hover:bg-soft-sand dark:hover:bg-dark-surface transition-colors" aria-label="Close">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <div class="space-y-5">
+                <div>
+                    <span class="text-xs font-bold text-forest-green dark:text-champagne" data-i18n="modalEyebrow">تخصيص طلبك</span>
+                    <h3 class="font-serif text-2xl font-bold mt-1" data-i18n="modalTitle">رسالة الإهداء والطلب السريع</h3>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-soft-sand dark:bg-dark-surface border border-stone-200/70 dark:border-white/10">
+                    <p class="text-xs text-muted-stone dark:text-dark-muted mb-1" data-i18n="modalSelectedLabel">الباقة / التنسيق المختار:</p>
+                    <p id="modal-bouquet-name" class="font-serif text-lg font-bold text-forest-green dark:text-champagne"></p>
+                </div>
+
+                <div>
+                    <label for="gift-message-input" class="block text-xs font-medium text-muted-stone dark:text-dark-muted mb-2" data-i18n="modalGiftLabel">
+                        رسالة الإهداء (تُطبع على الكارت المرفق مع الباقة):
+                    </label>
+                    <textarea
+                        id="gift-message-input"
+                        rows="4"
+                        class="w-full px-4 py-3 rounded-2xl bg-warm-white dark:bg-dark-surface border border-stone-300 dark:border-white/15 focus:outline-none focus:border-forest-green dark:focus:border-champagne text-sm leading-relaxed"
+                        data-i18n-placeholder="modalGiftPh"
+                        placeholder="اكتب عبارتك الدافئة هنا... (اختياري)"
+                    ></textarea>
+                </div>
+
+                <button type="button" onclick="sendWhatsAppOrder()" class="w-full py-4 px-6 rounded-2xl bg-forest-green hover:bg-forest-hover text-warm-white text-sm font-medium border border-champagne/30 flex items-center justify-center gap-2.5 shadow-lg">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 2C6.508 2 2.016 6.492 2.016 12.015c0 1.765.461 3.489 1.337 5.008L2 22l5.109-1.34a9.974 9.974 0 004.922 1.298h.004c5.522 0 10.015-4.492 10.015-10.015C22.05 6.42 17.554 2 12.031 2zm5.814 14.236c-.246.693-1.434 1.326-1.992 1.408-.511.076-1.174.108-1.894-.122-.437-.139-1.001-.325-1.72-.636-3.025-1.307-5-4.355-5.151-4.557-.15-.202-1.229-1.637-1.229-3.123 0-1.486.779-2.217 1.055-2.519.277-.302.604-.378.805-.378.202 0 .403.002.579.011.186.009.435-.071.681.52.246.592.842 2.051.917 2.202.075.151.125.327.025.529-.1.202-.15.327-.301.503-.151.176-.317.393-.452.528-.151.151-.308.315-.132.617.176.302.782 1.29 1.679 2.091 1.154 1.029 2.126 1.348 2.428 1.499.302.151.478.126.654-.076.176-.202.755-.881.956-1.183.202-.302.403-.252.68-.151.277.101 1.762.831 2.064.982.302.151.503.227.578.353.076.126.076.73-.17 1.423z"/></svg>
+                    <span data-i18n="modalSendBtn">إرسال الطلب عبر واتساب</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== تذييل الصفحة (Footer) ==================== -->
+    <footer class="border-t border-stone-200/80 dark:border-white/10 pt-14 pb-10 bg-warm-white dark:bg-dark-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- الشعار والعنوان المختصر -->
+                <div class="lg:col-span-4 text-center lg:text-start space-y-2">
+                    <a href="#home" onclick="navigateTo('home'); return false;" class="font-serif text-2xl font-bold text-forest-green dark:text-champagne inline-block" data-i18n="brandName">زهور رومانس</a>
+                    <p class="text-xs text-muted-stone dark:text-dark-muted leading-relaxed" data-i18n="footerAddress">
+                        حي الراية، طريق الملك عبدالله الفرعي — المدينة المنورة
+                    </p>
+                </div>
+
+                <!-- روابط الصفحات -->
+                <div class="lg:col-span-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs sm:text-sm text-muted-stone dark:text-dark-muted">
+                    <a href="#about" onclick="navigateTo('about'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navAbout">من نحن</a>
+                    <a href="#contact" onclick="navigateTo('contact'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navContact">تواصل معنا</a>
+                    <a href="#privacy" onclick="navigateTo('privacy'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navPrivacy">سياسة الخصوصية</a>
+                    <a href="#terms" onclick="navigateTo('terms'); return false;" class="hover:text-forest-green dark:hover:text-champagne transition-colors" data-i18n="navTerms">اتفاقية المستخدم</a>
+                </div>
+
+                <!-- زر الاتجاهات + أيقونات التواصل الاجتماعي -->
+                <div class="lg:col-span-4 flex flex-wrap items-center justify-center lg:justify-end gap-3">
+                    
+                    <!-- زر الاتجاهات (خرائط جوجل) -->
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=24.4906301,39.5905305" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-forest-green hover:bg-forest-hover text-warm-white text-xs font-medium border border-champagne/25 shadow-sm transition-all">
+                        <svg class="w-4 h-4 shrink-0 text-champagne" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span data-i18n="footerDirections">الاتجاهات</span>
+                    </a>
+
+                    <span class="hidden sm:inline-block h-5 w-px bg-stone-300 dark:bg-white/15"></span>
+
+                    <!-- أيقونات: واتساب + إنستغرام + فيسبوك -->
+                    <div class="flex items-center gap-2">
+                        <a href="https://wa.me/966541403095" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-soft-sand dark:bg-dark-card border border-stone-200 dark:border-white/10 text-forest-green dark:text-champagne hover:bg-forest-green hover:text-warm-white hover:border-forest-green dark:hover:bg-forest-green dark:hover:text-warm-white dark:hover:border-champagne/40 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.031 2C6.508 2 2.016 6.492 2.016 12.015c0 1.765.461 3.489 1.337 5.008L2 22l5.109-1.34a9.974 9.974 0 004.922 1.298h.004c5.522 0 10.015-4.492 10.015-10.015C22.05 6.42 17.554 2 12.031 2zm5.814 14.236c-.246.693-1.434 1.326-1.992 1.408-.511.076-1.174.108-1.894-.122-.437-.139-1.001-.325-1.72-.636-3.025-1.307-5-4.355-5.151-4.557-.15-.202-1.229-1.637-1.229-3.123 0-1.486.779-2.217 1.055-2.519.277-.302.604-.378.805-.378.202 0 .403.002.579.011.186.009.435-.071.681.52.246.592.842 2.051.917 2.202.075.151.125.327.025.529-.1.202-.15.327-.301.503-.151.176-.317.393-.452.528-.151.151-.308.315-.132.617.176.302.782 1.29 1.679 2.091 1.154 1.029 2.126 1.348 2.428 1.499.302.151.478.126.654-.076.176-.202.755-.881.956-1.183.202-.302.403-.252.68-.151.277.101 1.762.831 2.064.982.302.151.503.227.578.353.076.126.076.73-.17 1.423z"/>
+                            </svg>
+                        </a>
+
+                        <a href="https://www.instagram.com/romance.flowers/" target="_blank" rel="noopener" aria-label="Instagram" class="w-10 h-10 rounded-full bg-soft-sand dark:bg-dark-card border border-stone-200 dark:border-white/10 text-forest-green dark:text-champagne hover:bg-forest-green hover:text-warm-white hover:border-forest-green dark:hover:bg-forest-green dark:hover:text-warm-white dark:hover:border-champagne/40 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.8"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke-width="1.8"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2" stroke-linecap="round"></line>
+                            </svg>
+                        </a>
+
+                        <a href="https://web.facebook.com/profile.php?id=100079495879252&_rdc=1&_rdr#" target="_blank" rel="noopener" aria-label="Facebook" class="w-10 h-10 rounded-full bg-soft-sand dark:bg-dark-card border border-stone-200 dark:border-white/10 text-forest-green dark:text-champagne hover:bg-forest-green hover:text-warm-white hover:border-forest-green dark:hover:bg-forest-green dark:hover:text-warm-white dark:hover:border-champagne/40 flex items-center justify-center transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-stone-200/70 dark:border-white/10 text-center">
+                <p class="text-xs text-muted-stone dark:text-dark-muted" data-i18n="footerCopy">© 2026 جميع الحقوق محفوظة لـ زهور رومانس.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ==================== السكربت الكامل ==================== -->
+    <script>
+        const WHATSAPP_NUMBER = "966541403095";
+
+        const BOUQUETS_DATA = [
+            {
+                id: 1,
+                image: "https://drive.google.com/thumbnail?id=1dcEglnh8bpb7naS2DqwHcTKaYvIQKL2g&sz=w1000",
+                fallback: "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=800&q=80",
+                nameAr: "سلة تهنئة المولود الفاخرة",
+                nameEn: "Luxury Newborn Celebration Basket",
+                descAr: "تنسيق غني في سلة أنيقة يجمع بين الجوري والأوركيد والغاردينيا ولمسات الورد الأزرق، مثالي لتهنئة المواليد والحمد لله على السلامة.",
+                descEn: "An abundant basket arrangement featuring roses, orchids, gardenias, and soft blue blooms, crafted for welcoming a newborn."
+            },
+            {
+                id: 2,
+                image: "https://drive.google.com/thumbnail?id=1BeMC0568POzstYVEPn3-fxjVgwD6tXFy&sz=w1000",
+                fallback: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80",
+                nameAr: "صندوق همس الورود الوردية",
+                nameEn: "Blush & Lavender Gift Box",
+                descAr: "تشكيلة ناعمة من الجوري الوردي والقرنفل وزهور الليسيانثوس البنفسجية داخل صندوق هدايا فاخر يعكس الرقي والبهجة.",
+                descEn: "A soft curation of pink garden roses, carnations, and purple lisianthus presented in a signature luxury gift box."
+            },
+            {
+                id: 3,
+                image: "https://drive.google.com/thumbnail?id=1hb5wa5lQaoOjh-Doif5yB7JyVmbxkoAf&sz=w1000",
+                fallback: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+                nameAr: "باقة النقاء الكلاسيكية",
+                nameEn: "Classic Purity Hand-Tied Bouquet",
+                descAr: "تنسيق يدوي متناغم من الزهور الطبيعية المختارة بعناية بتغليف استوديو فاخر يجمع بين البساطة والفخامة.",
+                descEn: "A harmonious hand-tied selection of fresh seasonal blooms wrapped in minimalist luxury studio paper."
+            },
+            {
+                id: 4,
+                image: "https://drive.google.com/thumbnail?id=10CUoVbwgqM4a_1VpTPS-g6aVTVJWg7Bv&sz=w1000",
+                fallback: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80",
+                nameAr: "إشراقة الجوري المخملي",
+                nameEn: "Velvet Rose Radiance",
+                descAr: "باقة فاخرة بتدرجات لونية دافئة وأوراق خضراء طبيعية تضفي لمسة من الفخامة على أجمل لحظاتك.",
+                descEn: "A rich floral composition with warm velvety petals and fresh foliage tailored for memorable gifting."
+            },
+            {
+                id: 5,
+                image: "https://drive.google.com/thumbnail?id=1G_lvyj_50h8HEjXCHg399iT3hHYQWQUA&sz=w1000",
+                fallback: "https://images.unsplash.com/photo-1591886960571-74d43a9d4166?auto=format&fit=crop&w=800&q=80",
+                nameAr: "تنسيق الأناقة الموسمية",
+                nameEn: "Seasonal Elegance Arrangement",
+                descAr: "تنسيق عصري متوازن من أرقى الزهور الطبيعية اليومية ليضفي جمالاً هادئاً على المساحات والاحتفالات الخاصة.",
+                descEn: "A contemporary, balanced arrangement of daily fresh blooms designed to elevate any space or celebration."
+            },
+            {
+                id: 6,
+                image: "https://drive.google.com/thumbnail?id=12J7CLsslpB1WlqfSuKsbFAQxe6lR-2RC&sz=w1000",
+                fallback: "https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=800&q=80",
+                nameAr: "باقة المشاعر الراقية",
+                nameEn: "Refined Sentiments Bouquet",
+                descAr: "توليفة رومانسية فاخرة من الزهور المنتقاة بعناية فائقة لتعبر عن أصدق المشاعر في المناسبات المميزة.",
+                descEn: "A romantic luxury curation of hand-picked florals designed to convey heartfelt emotions on special occasions."
+            }
+        ];
+
+        const REVIEWS_DATA = [
+            {
+                authorAr: "عميلة زهور رومانس",
+                authorEn: "Romance Flowers Client",
+                textAr: "تنسيق راقٍ جداً والورد طبيعي وطازج، التغليف فخم والاهتمام بأدق التفاصيل يستحق كل التقدير.",
+                textEn: "Exceptionally refined arrangements with fresh natural blooms. The luxury wrapping and attention to detail are truly impressive."
+            },
+            {
+                authorAr: "عميل زهور رومانس",
+                authorEn: "Romance Flowers Client",
+                textAr: "تعامل راقٍ وسرعة في التجهيز والتوصيل داخل المدينة المنورة، الباقة وصلت أجمل مما توقعت.",
+                textEn: "Wonderful service and prompt preparation and delivery in Al Madinah. The bouquet arrived even more beautiful than expected."
+            },
+            {
+                authorAr: "عميلة زهور رومانس",
+                authorEn: "Romance Flowers Client",
+                textAr: "خياري الأول دائماً في المناسبات والهدايا، ذوق عالٍ في تنسيق الألوان وبطاقة الإهداء تطلع بشكل أنيق.",
+                textEn: "Always my first choice for gifts and special occasions. Impeccable taste in color palettes and elegant gift cards."
+            }
+        ];
+
+        const TRANSLATIONS = {
+            ar: {
+                pageTitle: "زهور رومانس | معرض الزهور والهدايا الفاخرة",
+                brandName: "زهور رومانس",
+                brandTag: "للزهور والهدايا",
+                navHome: "الرئيسية",
+                navBouquets: "الباقات",
+                navOccasions: "المناسبات",
+                navReviews: "آراء العملاء",
+                navAbout: "من نحن",
+                navContact: "تواصل معنا",
+                navPrivacy: "سياسة الخصوصية",
+                navTerms: "اتفاقية المستخدم",
+                navCta: "اطلب تنسيقاً خاصاً",
+                heroBadge: "المدينة المنورة • زهور طبيعية مقطوفة يومياً",
+                heroTitle1: "حيث تُزهر الرومانسية،",
+                heroTitle2: "في كل باقة وتفصيلة",
+                heroDesc: "في زهور رومانس، ننسّق لك باقات زهور فاخرة وهدايا منتقاة بعناية فائقة لتصنع لحظات لا تُنسى، بتصميم عصري يجمع بين البساطة والفخامة الهادئة.",
+                heroBtnPrimary: "استكشف الباقات",
+                heroBtnSecondary: "تنسيق هدية مخصصة",
+                heroCardTitle: "تقييم عملائنا على جوجل",
+                heroCardSub: "أكثر من 185 تقييم في المدينة المنورة",
+                bouquetsEyebrow: "معرض النماذج المختارة",
+                bouquetsTitle: "تشكيلة الباقات الفاخرة",
+                bouquetsSubtitle: "كل باقة تُصمم خصيصاً لك بأجود الزهور الطبيعية الموسمية مع إمكانية إضافة رسالة إهداء مطبوعة",
+                referenceNote: "تُنسق حسب الطلب — نموذج استرشادي لباقة مشابهة",
+                orderSimilarBtn: "اطلب تنسيقاً مشابهاً",
+                occEyebrow: "خدمة التنسيق المخصص",
+                occTitle: "تنسيق الهدايا حسب المناسبة",
+                occSubtitle: "نجمع لك الزهور الطبيعية مع الشوكولاتة الفاخرة، الشموع المعطرة، أو هديتك الخاصة في تنسيق يليق بمناسبتك.",
+                occCta: "تحدث مع منسّق الهدايا",
+                occ1Title: "الزفاف والخطوبة",
+                occ1Desc: "مسكات عرائس وتنسيقات فاخرة لليلة العمر بتفاصيل ناعمة وراقية.",
+                occ2Title: "أعياد الميلاد",
+                occ2Desc: "صناديق هدايا متكاملة تجمع الورد الطبيعي مع أفخر أنواع الشوكولاتة.",
+                occ3Title: "التخرج والنجاح",
+                occ3Desc: "باقات مبهجة وعبارات تهنئة مخصصة للاحتفاء بلحظات الإنجاز.",
+                occ4Title: "المواليد والتهنئة",
+                occ4Desc: "سلال وتنسيقات هادئة بألوان الباستيل الناعمة لاستقبال أجمل البدايات.",
+                reviewsEyebrow: "ثقة عملائنا في المدينة المنورة",
+                reviewsTitle: "ماذا يقول عملاؤنا",
+                reviewsScore: "4.6 من 5",
+                reviewsCount: "(بناءً على 185 تقييم على خرائط جوجل)",
+                reviewsMoreBtn: "عرض جميع التقييمات على جوجل",
+                backHome: "← العودة إلى الرئيسية",
+                aboutEyebrow: "قصتنا وشغفنا",
+                aboutTitle: "من نحن",
+                aboutP1: "في «زهور رومانس»، نؤمن بأن الزهور ليست مجرد هدية عابرة، بل هي رسالة صامتة تحمل أصدق المشاعر. بدأ شغفنا من الرغبة في تحويل كل لحظة إلى ذكرى فنية دافئة عبر تنسيقات زهور طبيعية منتقاة يومياً بعناية فائقة في المدينة المنورة.",
+                aboutP2: "نصمّم كل باقة وصندوق هدايا بروح عصرية هادئة تجمع بين جمال الطبيعة ولمسات التغليف الفاخر، مع اهتمام دقيق بأدق التفاصيل بدءاً من اختيار تدرجات الألوان وحتى طباعة بطاقة الإهداء الخاصة بك.",
+                aboutStat1Title: "زهور طازجة يومياً",
+                aboutStat1Desc: "انتقاء يدوي لأجود الأزهار الموسمية",
+                aboutStat2Title: "توصيل واستلام مرن",
+                aboutStat2Desc: "توصيل داخل المدينة أو استلام من المعرض",
+                contactEyebrow: "يسعدنا خدمتك",
+                contactTitle: "تواصل معنا",
+                contactSubtitle: "للطلبات الخاصة، تنسيق المناسبات، أو أي استفسار، تواصل معنا مباشرة عبر النموذج أو القنوات السريعة.",
+                contactNameLabel: "الاسم",
+                contactNamePh: "اكتب اسمك الكريم",
+                contactMsgLabel: "رسالتك أو تفاصيل المناسبة",
+                contactMsgPh: "أخبرنا عن الألوان المفضلة أو تفاصيل الهدية المطلوبة...",
+                contactSubmit: "إرسال الرسالة عبر واتساب",
+                contactDirectTitle: "قنوات التواصل المباشر",
+                contactWaBtn: "تواصل عبر واتساب",
+                contactIgBtn: "تابعنا على إنستغرام",
+                locationTitle: "موقع المعرض والاتجاهات",
+                locationAddress: "8625 طريق الملك عبدالله الفرعي، حي الراية، المدينة المنورة 42312، المملكة العربية السعودية",
+                contactHours: "ساعات العمل: يومياً من 4:00 عصراً حتى 12:00 منتصف الليل",
+                locationBtn: "الحصول على الاتجاهات عبر خرائط جوجل ←",
+                privacyTitle: "سياسة الخصوصية",
+                privacyP1: "في زهور رومانس، نحترم خصوصيتك ونلتزم بحماية كافة البيانات الشخصية التي تشاركها معنا عند طلب الباقات أو التواصل معنا عبر واتساب.",
+                privacyH1: "سرية رسائل الإهداء",
+                privacyB1: "تُعامل جميع نصوص «رسائل الإهداء» التي يكتبها العميل بسرية تامة، وتُستخدم حصرياً لطباعة بطاقة الإهداء المرفقة مع الباقة دون تخزينها أو مشاركتها مع أي طرف ثالث.",
+                privacyH2: "استخدام بيانات التواصل",
+                privacyB2: "تُستخدم بيانات التواصل والعنوان فقط لتأكيد تفاصيل التنسيق وإتمام عملية التوصيل بسلاسة، ولا نقوم ببيع أو مشاركة معلومات العملاء لأي أغراض تسويقية خارجية.",
+                termsTitle: "اتفاقية المستخدم",
+                termsH1: "النماذج الاسترشادية والزهور الموسمية",
+                termsB1: "جميع الصور المعروضة في الموقع هي نماذج استرشادية لأعمالنا. ونظراً لطبيعة الزهور الطبيعية ومواسم توفرها، قد يختلف تنسيق بعض أنواع الزهور بشكل طفيف حسب التوفر اليومي، مع التزامنا التام بالحفاظ على نفس الروح الفنية، وتدرجات الألوان، ومستوى الفخامة والجودة.",
+                termsH2: "تأكيد الطلب والتنسيق",
+                termsB2: "يتم تأكيد تفاصيل الباقة، التكلفة النهائية حسب الحجم والإضافات، وموعد التوصيل مباشرة مع فريقنا عبر واتساب قبل البدء بالتنسيق.",
+                modalEyebrow: "تخصيص طلبك",
+                modalTitle: "رسالة الإهداء والطلب السريع",
+                modalSelectedLabel: "الباقة / التنسيق المختار:",
+                modalGiftLabel: "رسالة الإهداء (تُطبع على الكارت المرفق مع الباقة):",
+                modalGiftPh: "اكتب عبارتك الدافئة هنا... (اختياري)",
+                modalSendBtn: "إرسال الطلب عبر واتساب",
+                footerAddress: "حي الراية، طريق الملك عبدالله الفرعي — المدينة المنورة",
+                footerDirections: "الاتجاهات",
+                footerCopy: "© 2026 جميع الحقوق محفوظة لـ زهور رومانس."
+            },
+            en: {
+                pageTitle: "Romance Flowers | Luxury Floral & Gift Gallery",
+                brandName: "Romance Flowers",
+                brandTag: "Flowers & Gifts",
+                navHome: "Home",
+                navBouquets: "Bouquets",
+                navOccasions: "Occasions",
+                navReviews: "Reviews",
+                navAbout: "About Us",
+                navContact: "Contact Us",
+                navPrivacy: "Privacy Policy",
+                navTerms: "Terms of Use",
+                navCta: "Request Bespoke Design",
+                heroBadge: "Al Madinah • Daily Fresh Natural Blooms",
+                heroTitle1: "Where Romance Blooms,",
+                heroTitle2: "in Every Delicate Detail",
+                heroDesc: "At Romance Flowers, we craft luxury floral bouquets and bespoke gift curations designed to create unforgettable moments, blending minimalist aesthetics with timeless sophistication.",
+                heroBtnPrimary: "Explore Bouquets",
+                heroBtnSecondary: "Custom Gift Arrangement",
+                heroCardTitle: "Google Customer Rating",
+                heroCardSub: "Over 185 reviews in Al Madinah",
+                bouquetsEyebrow: "Curated Showcase",
+                bouquetsTitle: "Signature Floral Collection",
+                bouquetsSubtitle: "Every bouquet is custom arranged using the finest seasonal blooms with a printed personalized gift card.",
+                referenceNote: "Custom made to order — Reference design for a similar bouquet",
+                orderSimilarBtn: "Order Similar Design",
+                occEyebrow: "Bespoke Curation",
+                occTitle: "Gifting by Occasion",
+                occSubtitle: "We pair fresh natural flowers with artisanal chocolates, scented candles, or your personal gift in an unforgettable presentation.",
+                occCta: "Speak with a Florist",
+                occ1Title: "Weddings & Engagement",
+                occ1Desc: "Bridal bouquets and refined floral styling crafted for life's most cherished celebrations.",
+                occ2Title: "Birthdays & Anniversaries",
+                occ2Desc: "Complete luxury gift boxes combining fresh roses with artisanal chocolates.",
+                occ3Title: "Graduation & Success",
+                occ3Desc: "Joyful arrangements and custom congratulatory notes to celebrate milestones.",
+                occ4Title: "Newborn & Celebrations",
+                occ4Desc: "Serene pastel baskets and gentle arrangements to welcome beautiful new beginnings.",
+                reviewsEyebrow: "Trusted in Al Madinah",
+                reviewsTitle: "What Our Clients Say",
+                reviewsScore: "4.6 out of 5",
+                reviewsCount: "(Based on 185 Google Maps reviews)",
+                reviewsMoreBtn: "View All Reviews on Google",
+                backHome: "← Back to Home",
+                aboutEyebrow: "Our Story & Passion",
+                aboutTitle: "About Us",
+                aboutP1: "At Romance Flowers, we believe flowers are more than a gift—they are a quiet language carrying your sincerest emotions. Our passion began with a vision to turn every moment into a warm artistic memory through daily hand-selected natural blooms in Al Madinah.",
+                aboutP2: "We craft every bouquet and gift box with calm contemporary elegance, uniting nature's beauty with refined packaging and meticulous attention to detail—from color harmony down to your printed gift message.",
+                aboutStat1Title: "Daily Fresh Blooms",
+                aboutStat1Desc: "Hand-selected seasonal flowers every morning",
+                aboutStat2Title: "Flexible Delivery & Pickup",
+                aboutStat2Desc: "Al Madinah delivery or in-store pickup",
+                contactEyebrow: "We're Here to Help",
+                contactTitle: "Contact Us",
+                contactSubtitle: "For bespoke orders, event styling, or inquiries, reach out directly via the form or our instant channels.",
+                contactNameLabel: "Your Name",
+                contactNamePh: "Enter your full name",
+                contactMsgLabel: "Your Message or Occasion Details",
+                contactMsgPh: "Tell us about your preferred palette or gift details...",
+                contactSubmit: "Send Message via WhatsApp",
+                contactDirectTitle: "Direct Channels",
+                contactWaBtn: "Chat on WhatsApp",
+                contactIgBtn: "Follow on Instagram",
+                locationTitle: "Gallery Location & Directions",
+                locationAddress: "8625 King Abdullah Branch Rd, Al Rayah, Al Madinah 42312, Saudi Arabia",
+                contactHours: "Working Hours: Daily from 4:00 PM to 12:00 AM",
+                locationBtn: "Get Directions on Google Maps →",
+                privacyTitle: "Privacy Policy",
+                privacyP1: "At Romance Flowers, we respect your privacy and are committed to safeguarding all personal information you share when ordering arrangements or contacting us via WhatsApp.",
+                privacyH1: "Confidentiality of Gift Messages",
+                privacyB1: "All personalized gift messages written by our customers are handled with strict confidentiality and used exclusively to print the accompanying gift card, without storing or sharing them with any third party.",
+                privacyH2: "Use of Contact Information",
+                privacyB2: "Contact and delivery details are used solely to confirm your arrangement and complete delivery smoothly. We never sell or share customer information for external marketing.",
+                termsTitle: "Terms of Use",
+                termsH1: "Reference Designs & Seasonal Availability",
+                termsB1: "All photos displayed on this website serve as reference models of our craft. Due to the natural and seasonal nature of fresh flowers, specific blooms may vary slightly based on daily availability while maintaining the exact same artistic spirit, color palette, and luxury quality.",
+                termsH2: "Order Confirmation",
+                termsB2: "Final arrangement details, sizing, add-ons, and delivery timing are confirmed directly with our team via WhatsApp prior to crafting your order.",
+                modalEyebrow: "Personalize Your Order",
+                modalTitle: "Gift Message & Quick Order",
+                modalSelectedLabel: "Selected Bouquet / Design:",
+                modalGiftLabel: "Gift Card Message (printed on the accompanying card):",
+                modalGiftPh: "Write your heartfelt message here... (Optional)",
+                modalSendBtn: "Send Order via WhatsApp",
+                footerAddress: "Al Rayah, King Abdullah Branch Rd — Al Madinah",
+                footerDirections: "Directions",
+                footerCopy: "© 2026 Romance Flowers. All rights reserved."
+            }
+        };
+
+        let currentLang = localStorage.getItem('romance_lang') || 'ar';
+        let selectedBouquet = { ar: '', en: '' };
+
+        // الوضع الفاتح هو الافتراضي ما لم يختر المستخدم الوضع الليلي
+        function initTheme() {
+            const savedTheme = localStorage.getItem('romance_theme');
+            const html = document.documentElement;
+            if (savedTheme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+            updateThemeIcons();
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            localStorage.setItem('romance_theme', html.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeIcons();
+        }
+
+        function updateThemeIcons() {
+            const isDark = document.documentElement.classList.contains('dark');
+            document.getElementById('sun-icon').classList.toggle('hidden', !isDark);
+            document.getElementById('moon-icon').classList.toggle('hidden', isDark);
+        }
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('romance_lang', lang);
+
+            const html = document.documentElement;
+            html.lang = lang;
+            html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            const dict = TRANSLATIONS[lang];
+            document.title = dict.pageTitle;
+            document.getElementById('lang-toggle').textContent = lang === 'ar' ? 'EN' : 'عربي';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.textContent = dict[key];
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key]) el.setAttribute('placeholder', dict[key]);
+            });
+
+            renderBouquets();
+            renderReviews();
+
+            if (selectedBouquet.ar) {
+                document.getElementById('modal-bouquet-name').textContent = lang === 'ar' ? selectedBouquet.ar : selectedBouquet.en;
+            }
+        }
+
+        function toggleLanguage() {
+            applyLanguage(currentLang === 'ar' ? 'en' : 'ar');
+        }
+
+        function renderBouquets() {
+            const grid = document.getElementById('bouquets-grid');
+            const dict = TRANSLATIONS[currentLang];
+
+            grid.innerHTML = BOUQUETS_DATA.map(item => {
+                const name = currentLang === 'ar' ? item.nameAr : item.nameEn;
+                const desc = currentLang === 'ar' ? item.descAr : item.descEn;
+                const safeAr = item.nameAr.replace(/'/g, "\\'");
+                const safeEn = item.nameEn.replace(/'/g, "\\'");
+
+                return `
+                    <article class="group bg-warm-white dark:bg-dark-card rounded-3xl overflow-hidden border border-stone-200/70 dark:border-white/10 shadow-studio-light dark:shadow-studio-dark hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                        <div class="p-3 pb-0">
+                            <div class="relative aspect-square rounded-2xl overflow-hidden bg-soft-sand dark:bg-dark-surface">
+                                <img
+                                    src="${item.image}"
+                                    onerror="this.onerror=null;this.src='${item.fallback}';"
+                                    referrerpolicy="no-referrer"
+                                    alt="${name}"
+                                    loading="lazy"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="p-6 flex flex-col flex-grow justify-between space-y-5">
+                            <div class="space-y-2.5">
+                                <h3 class="font-serif text-xl font-bold">${name}</h3>
+                                <p class="text-sm text-muted-stone dark:text-dark-muted leading-relaxed">${desc}</p>
+                                <p class="inline-flex items-center gap-1.5 text-xs font-medium text-forest-green dark:text-champagne pt-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-forest-green dark:bg-champagne shrink-0"></span>
+                                    <span>${dict.referenceNote}</span>
+                                </p>
+                            </div>
+
+                            <button type="button" onclick="openOrderModal('${safeAr}', '${safeEn}')" class="w-full py-3.5 px-4 bg-forest-green hover:bg-forest-hover text-warm-white text-sm font-medium rounded-xl border border-champagne/20 transition-colors duration-300 flex items-center justify-center gap-2">
+                                <span>${dict.orderSimilarBtn}</span>
+                                <svg class="w-4 h-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function renderReviews() {
+            const grid = document.getElementById('reviews-grid');
+            grid.innerHTML = REVIEWS_DATA.map(rev => {
+                const author = currentLang === 'ar' ? rev.authorAr : rev.authorEn;
+                const text = currentLang === 'ar' ? rev.textAr : rev.textEn;
+
+                return `
+                    <div class="p-7 rounded-3xl bg-warm-white dark:bg-dark-card border border-stone-200/70 dark:border-white/10 shadow-studio-light dark:shadow-studio-dark flex flex-col justify-between space-y-5">
+                        <div class="space-y-3">
+                            <div class="text-champagne text-sm tracking-widest">★★★★★</div>
+                            <p class="text-sm text-charcoal/90 dark:text-warm-white/90 leading-relaxed">"${text}"</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-200/70 dark:border-white/10">
+                            <span class="text-xs font-bold text-forest-green dark:text-champagne">${author}</span>
+                            <span class="text-[11px] text-muted-stone dark:text-dark-muted">Google Maps</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openOrderModal(nameAr, nameEn) {
+            selectedBouquet = { ar: nameAr, en: nameEn };
+            document.getElementById('modal-bouquet-name').textContent = currentLang === 'ar' ? nameAr : nameEn;
+            document.getElementById('gift-message-input').value = '';
+
+            const modal = document.getElementById('order-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function sendWhatsAppOrder() {
+            const giftMsg = document.getElementById('gift-message-input').value.trim();
+            const bouquetName = currentLang === 'ar' ? selectedBouquet.ar : selectedBouquet.en;
+
+            let text = '';
+            if (currentLang === 'ar') {
+                text = `مرحباً زهور رومانس، أرغب في طلب تنسيق مشابه لـ:\n*${bouquetName}*\n\n`;
+                text += giftMsg
+                    ? `💌 *رسالة الإهداء على الكارت:*\n"${giftMsg}"`
+                    : `💌 *رسالة الإهداء:* (بدون رسالة حالياً)`;
+            } else {
+                text = `Hello Romance Flowers, I would like to request a similar arrangement to:\n*${bouquetName}*\n\n`;
+                text += giftMsg
+                    ? `💌 *Gift Card Message:*\n"${giftMsg}"`
+                    : `💌 *Gift Card Message:* (None for now)`;
+            }
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+            closeOrderModal();
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value.trim();
+            const msg = document.getElementById('contact-message').value.trim();
+
+            const text = currentLang === 'ar'
+                ? `مرحباً زهور رومانس، أنا *${name}*\n${msg}`
+                : `Hello Romance Flowers, I am *${name}*\n${msg}`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+            e.target.reset();
+        }
+
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page-view').forEach(view => view.classList.add('hidden'));
+            const target = document.getElementById(`page-${pageId}`);
+            if (target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToSection(sectionId) {
+            navigateTo('home');
+            setTimeout(() => {
+                const el = document.getElementById(sectionId);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 60);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('order-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'order-modal') closeOrderModal();
+            });
+            initTheme();
+            applyLanguage(currentLang);
+        });
+    </script>
+</body>
+</html>
